@@ -883,6 +883,21 @@ defmodule Fab.DeCH.Person do
 
   @impl Fab.Person
   def prefix(opts) do
-    Fab.De.Person.prefix(opts)
+    opts
+    |> Keyword.fetch!(:sex)
+    |> do_prefix()
+  end
+
+  @spec do_prefix(:female | :male | :mixed) :: [String.t()]
+  defp do_prefix(:female) do
+    ["Dr.", "Frau", "Prof. Dr."]
+  end
+
+  defp do_prefix(:male) do
+    ["Dr.", "Herr", "Prof. Dr."]
+  end
+
+  defp do_prefix(:mixed) do
+    ["Dr.", "Frau", "Herr", "Prof. Dr."]
   end
 end
