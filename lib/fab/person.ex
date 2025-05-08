@@ -23,6 +23,7 @@ defmodule Fab.Person do
   - `en_ZA`
   - `es`
   - `fr`
+  - `ja`
   - `zh_CN`
   """
 
