@@ -4,7 +4,9 @@ defmodule Fab.Person.MixProject do
   def project do
     [
       app: :fab_person,
-      version: "0.0.0",
+      description:
+        "Fab.Person is an Elixir library for generating random information about a person",
+      version: "1.0.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
