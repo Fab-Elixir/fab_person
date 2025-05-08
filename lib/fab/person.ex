@@ -9,8 +9,25 @@ defmodule Fab.Person do
   - `cs_CZ`
   - `da`
   - `de`
+  - `de_AT`
+  - `de_CH`
+  - `dv`
+  - `el`
   - `en`
+  - `en_AU`
+  - `en_GB`
+  - `en_GH`
+  - `en_HK`
+  - `en_IN`
+  - `en_NG`
+  - `en_ZA`
   - `es`
+  - `fr`
+  - `ja`
+  - `pt_BR`
+  - `pt_PT`
+  - `ru`
+  - `zh_CN`
   """
 
   import Fab.Locale
