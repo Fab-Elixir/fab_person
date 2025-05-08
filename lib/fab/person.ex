@@ -1,6 +1,15 @@
 defmodule Fab.Person do
   @moduledoc """
   Functions for generating random information about a person.
+
+  ## Supported Locales
+
+  - `af_ZA`
+  - `az`
+  - `cs_CZ`
+  - `da`
+  - `en`
+  - `es`
   """
 
   import Fab.Locale
