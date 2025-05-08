@@ -9,6 +9,8 @@ defmodule Fab.Person do
   - `cs_CZ`
   - `da`
   - `de`
+  - `de_AT`
+  - `de_CH`
   - `en`
   - `es`
   """
