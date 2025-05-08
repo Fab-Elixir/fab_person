@@ -26,6 +26,7 @@ defmodule Fab.Person do
   - `ja`
   - `pt_BR`
   - `pt_PT`
+  - `ru`
   - `zh_CN`
   """
 
