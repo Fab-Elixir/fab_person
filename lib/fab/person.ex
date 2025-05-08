@@ -19,6 +19,7 @@ defmodule Fab.Person do
   - `en_GH`
   - `en_HK`
   - `en_IN`
+  - `en_NG`
   - `es`
   """
 
