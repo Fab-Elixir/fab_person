@@ -12,6 +12,7 @@ defmodule Fab.Person do
   - `de_AT`
   - `de_CH`
   - `dv`
+  - `el`
   - `en`
   - `es`
   """
