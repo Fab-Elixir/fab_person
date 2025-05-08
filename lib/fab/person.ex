@@ -22,6 +22,7 @@ defmodule Fab.Person do
   - `en_NG`
   - `en_ZA`
   - `es`
+  - `fr`
   """
 
   import Fab.Locale
