@@ -23,7 +23,7 @@ defmodule Fab.Person.MixProject do
   defp deps do
     [
       {:fab, "~> 1.0"},
-      {:ex_doc, "== 0.37.3", only: :dev, runtime: false},
+      {:ex_doc, "== 0.38.0", only: :dev, runtime: false},
       {:dialyxir, "== 1.4.5", only: :dev, runtime: false}
     ]
   end
