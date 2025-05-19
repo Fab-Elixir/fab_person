@@ -17,7 +17,7 @@ defmodule Fab.Person.MixProject do
 
   def application do
     [
-      extra_applications: [:eex, :logger]
+      extra_applications: [:logger]
     ]
   end
 
