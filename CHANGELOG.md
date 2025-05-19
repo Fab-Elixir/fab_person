@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Fab-Elixir/fab_person/compare/v1.0.0...v1.1.0) (2025-05-19)
+
+
+### Features
+
+* use Fab templating for full name localization ([#19](https://github.com/Fab-Elixir/fab_person/issues/19)) ([1d55e18](https://github.com/Fab-Elixir/fab_person/commit/1d55e18385f63e6eb7aafd3dbc0afe04c5fc01c0))
+
 ## 1.0.0 (2025-05-08)
 
 
