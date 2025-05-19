@@ -6,7 +6,7 @@ defmodule Fab.Person.MixProject do
       app: :fab_person,
       description:
         "Fab.Person is an Elixir library for generating random information about a person",
-      version: "1.0.0",
+      version: "1.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       docs: docs(),
