@@ -39,8 +39,8 @@ defmodule Fab.Person do
   @callback first_name([sex_t]) ::
               [String.t()]
 
-  @callback full_name() ::
-              [String.t()]
+  @callback full_name([sex_t]) ::
+              [Fab.Template.t()]
 
   @callback last_name([sex_t]) ::
               [String.t()]
@@ -59,7 +59,7 @@ defmodule Fab.Person do
 
   @optional_callbacks [
     first_name: 1,
-    full_name: 0,
+    full_name: 1,
     last_name: 1,
     middle_name: 1,
     prefix: 1,
@@ -77,13 +77,13 @@ defmodule Fab.Person do
   ## Examples
 
       iex> Fab.Person.first_name()
-      "Ciara"
+      "Laury"
 
       iex> Fab.Person.first_name(sex: :female)
-      "Cheryl"
+      "Hazel"
 
       iex> Fab.Person.first_name(sex: :male)
-      "Erik"
+      "Darryl"
   """
   @spec first_name([sex_t]) :: String.t()
   def first_name(opts \\ []) do
@@ -115,36 +115,47 @@ defmodule Fab.Person do
   ## Examples
 
       iex> Fab.Person.full_name()
-      "Osbaldo Reilly"
+      "Mrs. Greta Lebsack"
 
       iex> Fab.Person.full_name(first_name: "Anthony")
-      "Anthony Schuppe"
+      "Anthony Cummings"
 
       iex> Fab.Person.full_name(last_name: "Smith")
-      "Miss Orville Smith"
+      "Miss Waylon Smith"
 
       iex> Fab.Person.full_name(sex: :female)
-      "Dr. Amy Romaguera"
+      "Arlene Leffler"
 
       iex> Fab.Person.full_name(sex: :male)
-      "Mr. Bryan Reichert"
+      "Lyle Huel"
   """
   @spec full_name([sex_t]) :: String.t()
   def full_name(opts \\ []) do
     sex = Keyword.get(opts, :sex, :mixed)
 
-    bindings = [
-      prefix: Keyword.get(opts, :prefix, prefix(sex: sex)),
-      first_name: Keyword.get(opts, :first_name, first_name(sex: sex)),
-      middle_name: Keyword.get(opts, :middle_name, middle_name(sex: sex)),
-      last_name: Keyword.get(opts, :last_name, last_name(sex: sex)),
-      suffix: Keyword.get(opts, :suffix, suffix())
-    ]
+    defaults = Keyword.take(opts, [:first_name, :last_name, :middle_name, :prefix, :suffix])
 
     __MODULE__
-    |> localize(:full_name, [])
+    |> localize(:full_name, [[sex: sex]])
+    |> apply_defaults(defaults)
     |> random()
-    |> EEx.eval_string(bindings)
+    |> Fab.Template.render()
+  end
+
+  @spec apply_defaults([Fab.Template.t()], keyword) :: [Fab.Template.t()]
+  defp apply_defaults(templates, defaults) do
+    Enum.map(templates, fn template ->
+      bindings =
+        Enum.map(template.bindings, fn {key, value} = binding ->
+          if key in Keyword.keys(defaults) do
+            {key, defaults[key] || value}
+          else
+            binding
+          end
+        end)
+
+      %{template | bindings: bindings}
+    end)
   end
 
   @doc """
@@ -157,13 +168,13 @@ defmodule Fab.Person do
   ## Examples
 
       iex> Fab.Person.last_name()
-      "Reinger"
+      "Toy"
 
       iex> Fab.Person.last_name(sex: :female)
-      "Lehner"
+      "Rowe"
 
       iex> Fab.Person.last_name(sex: :male)
-      "Glover"
+      "Cronin"
   """
   @spec last_name([sex_t]) :: String.t()
   def last_name(opts \\ []) do
@@ -184,13 +195,13 @@ defmodule Fab.Person do
   ## Examples
 
       iex> Fab.Person.middle_name()
-      "Jules"
+      "Reign"
 
       iex> Fab.Person.middle_name(sex: :female)
-      "Ellen"
+      "Jolie"
 
       iex> Fab.Person.middle_name(sex: :male)
-      "William"
+      "Monroe"
   """
   @spec middle_name([sex_t]) :: String.t()
   def middle_name(opts \\ []) do
@@ -211,10 +222,10 @@ defmodule Fab.Person do
   ## Examples
 
       iex> Fab.Person.prefix()
-      "Mr."
+      "Mrs."
 
       iex> Fab.Person.prefix(sex: :female)
-      "Dr."
+      "Ms."
 
       iex> Fab.Person.prefix(sex: :male)
       "Mr."
@@ -234,7 +245,7 @@ defmodule Fab.Person do
   ## Examples
 
       iex> Fab.Person.sex()
-      "male"
+      "female"
   """
   @spec sex :: String.t()
   def sex do
@@ -249,7 +260,7 @@ defmodule Fab.Person do
   ## Examples
 
       iex> Fab.Person.suffix()
-      "DVM"
+      "PhD"
   """
   @spec suffix :: String.t()
   def suffix do

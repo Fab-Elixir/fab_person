@@ -586,9 +586,15 @@ defmodule Fab.Ja.Person do
   end
 
   @impl Fab.Person
-  def full_name do
+  def full_name(opts) do
     [
-      "<%= last_name %> <%= first_name %>"
+      %Fab.Template{
+        bindings: [
+          last_name: {Fab.Person, :last_name, [opts]},
+          first_name: {Fab.Person, :first_name, [opts]}
+        ],
+        source: "<%= last_name %> <%= first_name %>"
+      }
     ]
   end
 

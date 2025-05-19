@@ -481,10 +481,23 @@ defmodule Fab.Da.Person do
   end
 
   @impl Fab.Person
-  def full_name do
+  def full_name(opts) do
     [
-      "<%= first_name %> <%= last_name %>",
-      "<%= first_name %> <%= middle_name %> <%= last_name %>"
+      %Fab.Template{
+        bindings: [
+          first_name: {Fab.Person, :first_name, [opts]},
+          last_name: {Fab.Person, :last_name, [opts]}
+        ],
+        source: "<%= first_name %> <%= last_name %>"
+      },
+      %Fab.Template{
+        bindings: [
+          first_name: {Fab.Person, :first_name, [opts]},
+          middle_name: {Fab.Person, :middle_name, [opts]},
+          last_name: {Fab.Person, :last_name, [opts]}
+        ],
+        source: "<%= first_name %> <%= middle_name %> <%= last_name %>"
+      }
     ]
   end
 
