@@ -9,7 +9,7 @@ Add `:fab_person` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:fab_person, "~> 1.0"}
+    {:fab_person, "~> 1.1"}
   ]
 end
 ```

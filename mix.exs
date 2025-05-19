@@ -9,6 +9,7 @@ defmodule Fab.Person.MixProject do
       version: "1.0.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
+      docs: docs(),
       deps: deps(),
       package: package()
     ]
@@ -20,9 +21,15 @@ defmodule Fab.Person.MixProject do
     ]
   end
 
+  defp docs do
+    [
+      main: Fab.Person
+    ]
+  end
+
   defp deps do
     [
-      {:fab, "~> 1.0"},
+      {:fab, "~> 1.2"},
       {:ex_doc, "== 0.38.1", only: :dev, runtime: false},
       {:dialyxir, "== 1.4.5", only: :dev, runtime: false}
     ]

@@ -9,10 +9,18 @@ defmodule Fab.PersonTest do
   end
 
   defp seed(tags) do
-    (File.cwd!() <> "/lib/fab/person.ex")
-    |> File.stream!()
-    |> Stream.map(&String.trim/1)
-    |> Enum.at(tags[:doctest_line] - 1)
-    |> :binary.decode_unsigned()
+    seed =
+      (File.cwd!() <> "/lib/fab/person.ex")
+      |> File.stream!()
+      |> Stream.map(&String.trim/1)
+      |> Enum.at(tags[:doctest_line] - 1)
+      |> :binary.decode_unsigned()
+      |> to_string()
+
+    seed_len = String.length(seed)
+
+    seed
+    |> String.replace(~r/\d{#{seed_len - 7}}/, "")
+    |> String.to_integer()
   end
 end
