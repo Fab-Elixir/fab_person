@@ -31,7 +31,7 @@ defmodule Fab.Person.MixProject do
     [
       {:fab, "~> 1.2"},
       {:ex_doc, "== 0.38.2", only: :dev, runtime: false},
-      {:dialyxir, "== 1.4.5", only: :dev, runtime: false}
+      {:dialyxir, "== 1.4.8", only: :dev, runtime: false}
     ]
   end
 
